@@ -61,10 +61,41 @@ class ATM(Account):
         super().__init__(account_number, holder_name, balance)
         self.__pin = pin
         
-    def validate_pin(self, entered_pin):
-        return self.__pin == entered_pin
+    def validate_pin(self, user_pin):
+        return self.__pin == user_pin
     def show_details(self):
         super().show_details()
         print("ATM Account Details")
         print("PIN is secured and not displayed")
+        
+user = ATM(422322,"Naila",6000,7024)
+user_pin = int(input("Enter the PIN: "))
+if user.validate_pin(user_pin):
+    while True:
+        print("\nACCOUNT DETAILS")
+        print("1.Deposit Money")
+        print("2.Withdraw Money")
+        print("3.Check Balance")
+        print("4.Show Account Details")
+        print("5.Exit")
+        choice = int(input("Enter your choice : "))
+        if choice == 1:
+            dep_amount = int(input("Enter the amount to deposit: "))
+            user.deposit(dep_amount)
+        elif choice == 2:
+            with_amount = int(input("Enter the amount to withdraw: "))
+            user.withdraw(with_amount)
+        elif choice == 3:
+            print(f"Current Balance - {user.check_balance()}")
+        elif choice == 4:
+            user.show_details()
+        elif choice == 5:
+            print("Exiting from ATM")
+            break
+        else:
+            print("Invalid Choice")
+else:
+    print("Incorrect PIN")
+        
+    
     
